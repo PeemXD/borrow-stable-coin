@@ -19,4 +19,10 @@ contract PepoStablecoin is ERC20, ERC20Permit, Ownable{
         _burn(account, value);
     }
     
+    function getRatio(address borrower) public view returns (uint256) {
+        if (deptCollateralRatios[borrower].collateral == 0) {
+            return 0;
+        }
+        return (deptCollateralRatios[borrower].dept * 100) / deptCollateralRatios[borrower].collateral;
+    }
 }
