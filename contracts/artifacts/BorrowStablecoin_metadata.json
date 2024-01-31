@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.22+commit.4fc1097e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/BorrowStablecoin.sol": "BorrowStablecoin"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/BorrowStablecoin.sol": {
+			"keccak256": "0xa5db49c6132f7e98c6fa066a4248277638578e630d004b506bcf6c6156fa0395",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://87384da5efebfb519d83c7a7def8e8d626712bc0d2f084ebab5eae1a9b16816c",
+				"dweb:/ipfs/QmUrtogLaG3o3RS3ziU7ziWfMxhQYUzEgyBWMjo1vxP3nX"
+			]
+		}
+	},
+	"version": 1
+}
