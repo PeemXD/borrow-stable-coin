@@ -16,8 +16,10 @@ contract PepoStablecoin is ERC20, ERC20Permit, Ownable{
     AggregatorV3Interface internal ethPriceFeed;
 
     event Borrow(address indexed owner, uint amount, bool isUSDP);
+    event PayBack(address indexed owner, uint deptAmount, bool isUSDP);
+    event ReturnCollateralAssets(address indexed owner, uint value, bool isETH);
     event Liquidate(address indexed owner, uint amount, bool isETH);
-    event LogMsgValue(uint value);
+
 
 
     constructor() ERC20("Pepo Stablecoin", "USDP") ERC20Permit("USDP") Ownable(_msgSender()) {
@@ -34,12 +36,10 @@ contract PepoStablecoin is ERC20, ERC20Permit, Ownable{
     }
 
     function borrow(uint ratio) public payable {
-        emit LogMsgValue(msg.value);
-        // require(msg.value == 1000000000000000000, "eth collateral must greater than 0");
-        require(ratio <= 75, "Ratio must less than equal 75%");
+        require(ratio <= 75, "ratio must less than equal 75%");
 
-        uint collateral =  getEthPrice() * msg.value/10**18;
-        uint dept = collateral * ratio / 100;
+        uint collateral =  msg.value;
+        uint dept = collateral / 10**18 * getEthPrice() * ratio / 100;
         deptCollateralRatios[msg.sender] = deptCollateralRatio(
             dept,
             collateral
@@ -50,8 +50,25 @@ contract PepoStablecoin is ERC20, ERC20Permit, Ownable{
         emit Borrow(_msgSender(), dept, true);
     }
 
+    function payBack(uint256 payBackAmount) public onlyOwner {
+        require(payBackAmount <= deptCollateralRatios[_msgSender()].dept, "the payBack amount must less than equal your dept");
+
+        _burn(_msgSender(), payBackAmount);
+        deptCollateralRatios[_msgSender()].dept = deptCollateralRatios[_msgSender()].dept - payBackAmount;
+
+        emit PayBack(_msgSender(), payBackAmount, true);
+
+        if (deptCollateralRatios[_msgSender()].dept == 0) {
+            uint collateralAsset = deptCollateralRatios[_msgSender()].collateral;
+            payable(_msgSender()).transfer(collateralAsset);
+            deptCollateralRatios[_msgSender()].collateral = 0;
+            
+            emit ReturnCollateralAssets(_msgSender(), collateralAsset, true);
+        }        
+    }
+
     function liquidate(address addr) public onlyOwner {
-        require(deptCollateralRatios[addr].dept / (getEthPrice() * deptCollateralRatios[addr].collateral) * 100 >= 85, "currently dept to correteral ratio less than 85%");
+        require((deptCollateralRatios[addr].dept * 100) / (deptCollateralRatios[addr].collateral * getEthPrice())  >= 85, "currently dept to correteral ratio less than 85%");
 
         // TODO: sell ETH
         // ...
@@ -60,6 +77,18 @@ contract PepoStablecoin is ERC20, ERC20Permit, Ownable{
         deptCollateralRatios[addr] = deptCollateralRatio(0, 0);
 
         emit Borrow(addr, liquidateEthAmount, true);
+    }
+
+    function getDept(address addr) public view returns (uint ratio) {
+        return deptCollateralRatios[addr].dept;
+    }
+
+    function getCollateral(address addr) public view returns (uint ratio) {
+        return deptCollateralRatios[addr].collateral / 10**18 * getEthPrice();
+    }
+
+    function getRatio(address addr) public view returns (uint ratio) {
+        return (deptCollateralRatios[addr].dept * 100) / (deptCollateralRatios[addr].collateral / 10**18 * getEthPrice());
     }
     
 }

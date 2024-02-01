@@ -289,19 +289,6 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "value",
-						"type": "uint256"
-					}
-				],
-				"name": "LogMsgValue",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "previousOwner",
@@ -315,6 +302,56 @@
 					}
 				],
 				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "deptAmount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "isUSDP",
+						"type": "bool"
+					}
+				],
+				"name": "PayBack",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "isETH",
+						"type": "bool"
+					}
+				],
+				"name": "ReturnCollateralAssets",
 				"type": "event"
 			},
 			{
@@ -492,12 +529,69 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getCollateral",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "ratio",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getDept",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "ratio",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "getEthPrice",
 				"outputs": [
 					{
 						"internalType": "uint256",
 						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "getRatio",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "ratio",
 						"type": "uint256"
 					}
 				],
@@ -560,6 +654,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "payBackAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "payBack",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -911,11 +1018,11 @@
 			]
 		},
 		"@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-			"keccak256": "0xc3e1fa9d1987f8d349dfb4d6fe93bf2ca014b52ba335cfac30bfe71e357e6f80",
+			"keccak256": "0x3f543500a3ee74aaceac1d2cea40ffb9e398b60228d0b3299ff726fbd4a2e268",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c5703ccdeb7b1d685e375ed719117e9edf2ab4bc544f24f23b0d50ec82257229",
-				"dweb:/ipfs/QmTdwkbQq7owpCiyuzE7eh5LrD2ddrBCZ5WHVsWPi1RrTS"
+				"bzz-raw://1de87e8f9e79772ce28a7c425db509f523e5ef496d5e0eaf42fe464350a7f8b6",
+				"dweb:/ipfs/QmQGETRw1T9LS31iHwESjMkWPE8NRPdpPTLyDU6h2BDtgD"
 			]
 		},
 		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
@@ -1031,11 +1138,11 @@
 			]
 		},
 		"contracts/PepoStablecoin.sol": {
-			"keccak256": "0x8df76d831d553934cd3f40a32c5e011a2b2574d9fd151536df5c3bf2104ceb10",
+			"keccak256": "0xc8d10d05b8a2139791c652633fe970709ee075ac5d7dad6afbf62ad4356b48e9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2f584d4a09e7305770c2b93a77320e19ac753e2efcaefcc7f7e682c431c8ba19",
-				"dweb:/ipfs/QmNhMqLweVFs88vFGvG9NEwDrvhixr1P3zmkbzHzgvYg3P"
+				"bzz-raw://721fcdc3f05fca4ca1fc26d000dc7d770080ad8e0a732ef574b8d51504998c5e",
+				"dweb:/ipfs/QmaKB8Ck9CHVQctxPtPi1HYhHXirfBgaz38eiRst758HzD"
 			]
 		},
 		"tests/MockAggregatorV3.sol": {
