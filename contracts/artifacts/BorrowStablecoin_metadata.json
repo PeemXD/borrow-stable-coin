@@ -4,7 +4,39 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "ratio",
+						"type": "uint256"
+					}
+				],
+				"name": "borrow",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getEthPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -32,12 +64,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/BorrowStablecoin.sol": {
-			"keccak256": "0x44b4be62d7817f204ce06443c3b12457a60c93644706a0c0f83252ff86d2644d",
+		"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol": {
+			"keccak256": "0xfe4e8bb4861bb3860ba890ab91a3b818ec66e5a8f544fb608cfcb73f433472cd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://08830237e28f71b6bff7afa82184db354a2bb56e1c03755c39e459ab4f0a526c",
-				"dweb:/ipfs/QmbtZHgap33wAb9jguYCwEzCqGUGY5TZswavVVyYJSW4A9"
+				"bzz-raw://644cff84052e1e82b5bb502b2a46e8f142a62b0db4cd9b38200798ba8373c6f7",
+				"dweb:/ipfs/QmTa99QHrJBn3SXDizquPBUiTxVCNKQrHgaWJhuds5Sce2"
+			]
+		},
+		"contracts/BorrowStablecoin.sol": {
+			"keccak256": "0x75d5a45de1a2601b12741c290176f8ff010ea82bf3d95052c3309d19e5819554",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5625a7b5863c1b9b4b6a77b4d84d060a5843354db5ec34e4eda4dc06d1c8bd3e",
+				"dweb:/ipfs/QmYm8mgCfnMdhXjpNRs5RgZDXU9gEzZjTXabSKSLgUyRjn"
 			]
 		}
 	},
