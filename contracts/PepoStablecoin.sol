@@ -4,7 +4,8 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts/ownership/Ownable.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+// import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "tests/MockAggregatorV3.sol";
 
 contract PepoStablecoin is ERC20, ERC20Permit, Ownable{
     struct deptCollateralRatio {
@@ -16,9 +17,15 @@ contract PepoStablecoin is ERC20, ERC20Permit, Ownable{
 
     event Borrow(address indexed owner, uint amount, bool isUSDP);
     event Liquidate(address indexed owner, uint amount, bool isETH);
+    event LogMsgValue(uint value);
+
 
     constructor() ERC20("Pepo Stablecoin", "USDP") ERC20Permit("USDP") Ownable(_msgSender()) {
-        ethPriceFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);
+        // Use MockAggregatorV3 for local development
+        ethPriceFeed = AggregatorV3Interface(address(new MockAggregatorV3()));
+
+        // Use Real in ETH chain
+        // ethPriceFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);
     }
 
     function getEthPrice() public view returns (uint) {
@@ -26,11 +33,13 @@ contract PepoStablecoin is ERC20, ERC20Permit, Ownable{
         return uint(price);
     }
 
-    function borrow(uint ratio) public payable{
+    function borrow(uint ratio) public payable {
+        emit LogMsgValue(msg.value);
+        // require(msg.value == 1000000000000000000, "eth collateral must greater than 0");
         require(ratio <= 75, "Ratio must less than equal 75%");
 
-        uint collateral =  getEthPrice() * msg.value;
-        uint dept = collateral * ratio;
+        uint collateral =  getEthPrice() * msg.value/10**18;
+        uint dept = collateral * ratio / 100;
         deptCollateralRatios[msg.sender] = deptCollateralRatio(
             dept,
             collateral
@@ -48,9 +57,9 @@ contract PepoStablecoin is ERC20, ERC20Permit, Ownable{
         // ...
         
         uint liquidateEthAmount = deptCollateralRatios[addr].collateral;
-        deptCollateralRatios[addr] = deptCollateralRatio(0,0);
+        deptCollateralRatios[addr] = deptCollateralRatio(0, 0);
 
-        emit Borrow(_msgSender(), liquidateEthAmount, true);
+        emit Borrow(addr, liquidateEthAmount, true);
     }
     
 }

@@ -289,6 +289,19 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "LogMsgValue",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": true,
 						"internalType": "address",
 						"name": "previousOwner",
@@ -873,14 +886,6 @@
 		"remappings": []
 	},
 	"sources": {
-		"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol": {
-			"keccak256": "0xfe4e8bb4861bb3860ba890ab91a3b818ec66e5a8f544fb608cfcb73f433472cd",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://644cff84052e1e82b5bb502b2a46e8f142a62b0db4cd9b38200798ba8373c6f7",
-				"dweb:/ipfs/QmTa99QHrJBn3SXDizquPBUiTxVCNKQrHgaWJhuds5Sce2"
-			]
-		},
 		"@openzeppelin/contracts/interfaces/IERC5267.sol": {
 			"keccak256": "0x92aa1df62dc3d33f1656d63bede0923e0df0b706ad4137c8b10b0a8fe549fd92",
 			"license": "MIT",
@@ -1026,11 +1031,19 @@
 			]
 		},
 		"contracts/PepoStablecoin.sol": {
-			"keccak256": "0x57e0fe722ea74dbda649435d609bdba72d57aae23afd63f4af698994f9c76562",
+			"keccak256": "0x8df76d831d553934cd3f40a32c5e011a2b2574d9fd151536df5c3bf2104ceb10",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3ba53b470d838d03cf4487b6e9b69f8c74413d5e79401c1ae96d2e9fec0e5e38",
-				"dweb:/ipfs/QmRG2jGjmFb1okmJCeMdbEJo6jYQt4rFvTxcGCRFCF7AY8"
+				"bzz-raw://2f584d4a09e7305770c2b93a77320e19ac753e2efcaefcc7f7e682c431c8ba19",
+				"dweb:/ipfs/QmNhMqLweVFs88vFGvG9NEwDrvhixr1P3zmkbzHzgvYg3P"
+			]
+		},
+		"tests/MockAggregatorV3.sol": {
+			"keccak256": "0x0b38d88226ae0e9f4db512cff518f735621d1f6b515d7ddcc77c0b86d1f9173b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://5f7864a2943e60d55382ced69c38257d22de719b4cb4e04258edf361bd729f71",
+				"dweb:/ipfs/QmWost9TU9d5c3RJbkUcv91sKDtrMaj7trCxnFQzqmB9NN"
 			]
 		}
 	},
