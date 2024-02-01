@@ -33,11 +33,11 @@
 	},
 	"sources": {
 		"contracts/BorrowStablecoin.sol": {
-			"keccak256": "0xa5db49c6132f7e98c6fa066a4248277638578e630d004b506bcf6c6156fa0395",
+			"keccak256": "0x44b4be62d7817f204ce06443c3b12457a60c93644706a0c0f83252ff86d2644d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://87384da5efebfb519d83c7a7def8e8d626712bc0d2f084ebab5eae1a9b16816c",
-				"dweb:/ipfs/QmUrtogLaG3o3RS3ziU7ziWfMxhQYUzEgyBWMjo1vxP3nX"
+				"bzz-raw://08830237e28f71b6bff7afa82184db354a2bb56e1c03755c39e459ab4f0a526c",
+				"dweb:/ipfs/QmbtZHgap33wAb9jguYCwEzCqGUGY5TZswavVVyYJSW4A9"
 			]
 		}
 	},
